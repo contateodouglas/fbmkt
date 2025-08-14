@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - Facebook Marketplace Auto Poster</title>
+    <link rel="stylesheet" href="../styles/common.css">
+    <link rel="stylesheet" href="options.css">
+</head>
+<body>
+    <div class="options-container">
+        <!-- Header -->
+        <div class="options-header">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="../assets/icons/icon48.png" alt="Logo" class="logo-img">
+                    <div class="header-text">
+                        <h1>Facebook Marketplace Auto Poster</h1>
+                        <p>Configurações e Preferências</p>
+                    </div>
+                </div>
+                <div class="version-info">
+                    <span class="version">v1.0.0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="options-nav">
+            <button class="nav-item active" data-section="general">
+                ⚙️ Geral
+            </button>
+            <button class="nav-item" data-section="automation">
+                🤖 Automação
+            </button>
+            <button class="nav-item" data-section="notifications">
+                🔔 Notificações
+            </button>
+            <button class="nav-item" data-section="data">
+                💾 Dados
+            </button>
+            <button class="nav-item" data-section="about">
+                ℹ️ Sobre
+            </button>
+        </div>
+
+        <!-- Content -->
+        <div class="options-content">
+            <!-- General Settings -->
+            <div class="section active" id="general">
+                <div class="section-header">
+                    <h2>Configurações Gerais</h2>
+                    <p>Personalize o comportamento básico da extensão</p>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Publicação</h3>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Publicação Automática</label>
+                            <p class="setting-description">Publicar anúncios automaticamente quando agendados</p>
+                        </div>
+                        <div class="setting-control">
+                            <label class="switch">
+                                <input type="checkbox" id="autoPublish" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Intervalo entre Publicações</label>
+                            <p class="setting-description">Tempo de espera entre publicações em massa (segundos)</p>
+                        </div>
+                        <div class="setting-control">
+                            <input type="number" id="publishDelay" min="10" max="300" value="30" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Máximo de Tentativas</label>
+                            <p class="setting-description">Número máximo de tentativas em caso de falha</p>
+                        </div>
+                        <div class="setting-control">
+                            <select id="maxRetries" class="form-control">
+                                <option value="1">1 tentativa</option>
+                                <option value="2">2 tentativas</option>
+                                <option value="3" selected>3 tentativas</option>
+                                <option value="5">5 tentativas</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Interface</h3>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Tema</label>
+                            <p class="setting-description">Escolha o tema da interface</p>
+                        </div>
+                        <div class="setting-control">
+                            <select id="theme" class="form-control">
+                                <option value="light" selected>Claro</option>
+                                <option value="dark">Escuro</option>
+                                <option value="auto">Automático</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Idioma</label>
+                            <p class="setting-description">Idioma da interface</p>
+                        </div>
+                        <div class="setting-control">
+                            <select id="language" class="form-control">
+                                <option value="pt-BR" selected>Português (Brasil)</option>
+                                <option value="en-US">English (US)</option>
+                                <option value="es-ES">Español</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Localização</h3>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Fuso Horário</label>
+                            <p class="setting-description">Fuso horário para agendamentos</p>
+                        </div>
+                        <div class="setting-control">
+                            <select id="timezone" class="form-control">
+                                <option value="America/Sao_Paulo" selected>São Paulo (GMT-3)</option>
+                                <option value="America/New_York">New York (GMT-5)</option>
+                                <option value="Europe/London">London (GMT+0)</option>
+                                <option value="Asia/Tokyo">Tokyo (GMT+9)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Localização Padrão</label>
+                            <p class="setting-description">Localização padrão para novos anúncios</p>
+                        </div>
+                        <div class="setting-control">
+                            <input type="text" id="defaultLocation" placeholder="Ex: São Paulo, SP" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Automation Settings -->
+            <div class="section" id="automation">
+                <div class="section-header">
+                    <h2>Configurações de Automação</h2>
+                    <p>Configure como a automação deve funcionar</p>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Comportamento</h3>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Modo de Depuração</label>
+                            <p class="setting-description">Ativar logs detalhados para depuração</p>
+                        </div>
+                        <div class="setting-control">
+                            <label class="switch">
+                                <input type="checkbox" id="debugMode">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Aguardar Carregamento</label>
+                            <p class="setting-description">Tempo de espera para elementos carregarem (segundos)</p>
+                        </div>
+                        <div class="setting-control">
+                            <input type="number" id="waitTimeout" min="5" max="30" value="10" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Velocidade de Digitação</label>
+                            <p class="setting-description">Velocidade para preencher campos (ms por caractere)</p>
+                        </div>
+                        <div class="setting-control">
+                            <select id="typingSpeed" class="form-control">
+                                <option value="25">Muito Rápida (25ms)</option>
+                                <option value="50" selected>Rápida (50ms)</option>
+                                <option value="100">Normal (100ms)</option>
+                                <option value="200">Lenta (200ms)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Tratamento de Erros</h3>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Continuar em Caso de Erro</label>
+                            <p class="setting-description">Continuar processando outros anúncios se um falhar</p>
+                        </div>
+                        <div class="setting-control">
+                            <label class="switch">
+                                <input type="checkbox" id="continueOnError" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Salvar Screenshots de Erro</label>
+                            <p class="setting-description">Capturar screenshots quando ocorrerem erros</p>
+                        </div>
+                        <div class="setting-control">
+                            <label class="switch">
+                                <input type="checkbox" id="saveErrorScreenshots">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Limites de Segurança</h3>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Máximo de Publicações por Hora</label>
+                            <p class="setting-description">Limite para evitar bloqueios do Facebook</p>
+                        </div>
+                        <div class="setting-control">
+                            <select id="maxPostsPerHour" class="form-control">
+                                <option value="5">5 por hora</option>
+                                <option value="10" selected>10 por hora</option>
+                                <option value="20">20 por hora</option>
+                                <option value="0">Sem limite</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Máximo de Publicações por Dia</label>
+                            <p class="setting-description">Limite diário de publicações</p>
+                        </div>
+                        <div class="setting-control">
+                            <select id="maxPostsPerDay" class="form-control">
+                                <option value="50">50 por dia</option>
+                                <option value="100" selected>100 por dia</option>
+                                <option value="200">200 por dia</option>
+                                <option value="0">Sem limite</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notifications Settings -->
+            <div class="section" id="notifications">
+                <div class="section-header">
+                    <h2>Configurações de Notificações</h2>
+                    <p>Configure quando e como receber notificações</p>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Tipos de Notificação</h3>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Notificações Ativadas</label>
+                            <p class="setting-description">Receber notificações da extensão</p>
+                        </div>
+                        <div class="setting-control">
+                            <label class="switch">
+                                <input type="checkbox" id="notifications" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Publicação Bem-sucedida</label>
+                            <p class="setting-description">Notificar quando um anúncio for publicado</p>
+                        </div>
+                        <div class="setting-control">
+                            <label class="switch">
+                                <input type="checkbox" id="notifySuccess" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Erros de Publicação</label>
+                            <p class="setting-description">Notificar quando houver falhas na publicação</p>
+                        </div>
+                        <div class="setting-control">
+                            <label class="switch">
+                                <input type="checkbox" id="notifyErrors" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Agendamentos</label>
+                            <p class="setting-description">Notificar sobre agendamentos próximos</p>
+                        </div>
+                        <div class="setting-control">
+                            <label class="switch">
+                                <input type="checkbox" id="notifyScheduled" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Configurações de Som</h3>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Sons de Notificação</label>
+                            <p class="setting-description">Reproduzir sons nas notificações</p>
+                        </div>
+                        <div class="setting-control">
+                            <label class="switch">
+                                <input type="checkbox" id="notificationSounds">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Volume</label>
+                            <p class="setting-description">Volume dos sons de notificação</p>
+                        </div>
+                        <div class="setting-control">
+                            <input type="range" id="notificationVolume" min="0" max="100" value="50" class="volume-slider">
+                            <span class="volume-value">50%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Settings -->
+            <div class="section" id="data">
+                <div class="section-header">
+                    <h2>Gerenciamento de Dados</h2>
+                    <p>Gerencie seus dados e configurações</p>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Backup e Restauração</h3>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Exportar Dados</label>
+                            <p class="setting-description">Baixar todos os seus anúncios e configurações</p>
+                        </div>
+                        <div class="setting-control">
+                            <button class="btn btn-primary" id="exportDataBtn">
+                                📥 Exportar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Importar Dados</label>
+                            <p class="setting-description">Restaurar dados de um backup anterior</p>
+                        </div>
+                        <div class="setting-control">
+                            <input type="file" id="importDataInput" accept=".json" style="display: none;">
+                            <button class="btn btn-secondary" id="importDataBtn">
+                                📤 Importar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Limpeza de Dados</h3>
+                    
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Limpar Anúncios Antigos</label>
+                            <p class="setting-description">Remover anúncios publicados há mais de 30 dias</p>
+                        </div>
+                        <div class="setting-control">
+                            <button class="btn btn-outline" id="cleanOldAdsBtn">
+                                🧹 Limpar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Limpar Logs</label>
+                            <p class="setting-description">Remover logs de depuração antigos</p>
+                        </div>
+                        <div class="setting-control">
+                            <button class="btn btn-outline" id="cleanLogsBtn">
+                                📋 Limpar Logs
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <label class="setting-label">Resetar Tudo</label>
+                            <p class="setting-description">Apagar todos os dados e configurações</p>
+                        </div>
+                        <div class="setting-control">
+                            <button class="btn btn-danger" id="resetAllBtn">
+                                ⚠️ Resetar Tudo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Estatísticas</h3>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalAdsCount">0</div>
+                            <div class="stat-label">Total de Anúncios</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="publishedAdsCount">0</div>
+                            <div class="stat-label">Publicados</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="scheduledAdsCount">0</div>
+                            <div class="stat-label">Agendados</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="storageUsed">0 KB</div>
+                            <div class="stat-label">Armazenamento</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <div class="section" id="about">
+                <div class="section-header">
+                    <h2>Sobre a Extensão</h2>
+                    <p>Informações sobre o Facebook Marketplace Auto Poster</p>
+                </div>
+
+                <div class="about-content">
+                    <div class="about-section">
+                        <h3>Versão</h3>
+                        <p>Facebook Marketplace Auto Poster v1.0.0</p>
+                        <p>Desenvolvido com ❤️ para automatizar suas vendas no Facebook Marketplace</p>
+                    </div>
+
+                    <div class="about-section">
+                        <h3>Recursos</h3>
+                        <ul class="feature-list">
+                            <li>✅ Publicação automática de anúncios</li>
+                            <li>✅ Agendamento de publicações</li>
+                            <li>✅ Publicação em massa</li>
+                            <li>✅ Gerenciamento de imagens</li>
+                            <li>✅ Templates de anúncios</li>
+                            <li>✅ Estatísticas detalhadas</li>
+                            <li>✅ Backup e restauração</li>
+                            <li>✅ Interface intuitiva</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-section">
+                        <h3>Suporte</h3>
+                        <p>Precisa de ajuda? Entre em contato conosco:</p>
+                        <div class="support-links">
+                            <a href="#" class="support-link">📧 Email de Suporte</a>
+                            <a href="#" class="support-link">📖 Documentação</a>
+                            <a href="#" class="support-link">🐛 Reportar Bug</a>
+                            <a href="#" class="support-link">💡 Sugerir Recurso</a>
+                        </div>
+                    </div>
+
+                    <div class="about-section">
+                        <h3>Licença e Privacidade</h3>
+                        <p>Esta extensão respeita sua privacidade e não coleta dados pessoais.</p>
+                        <p>Todos os dados são armazenados localmente no seu navegador.</p>
+                        <div class="legal-links">
+                            <a href="#" class="legal-link">📄 Termos de Uso</a>
+                            <a href="#" class="legal-link">🔒 Política de Privacidade</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="options-footer">
+            <div class="footer-actions">
+                <button class="btn btn-outline" id="resetSettingsBtn">
+                    🔄 Restaurar Padrões
+                </button>
+                <button class="btn btn-primary" id="saveSettingsBtn">
+                    💾 Salvar Configurações
+                </button>
+            </div>
+            <div class="footer-info">
+                <p>© 2024 Facebook Marketplace Auto Poster. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Processando...</p>
+        </div>
+    </div>
+
+    <script src="../lib/utils.js"></script>
+    <script src="../lib/database.js"></script>
+    <script src="options.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Marketplace Auto Poster</title>
+    <link rel="stylesheet" href="../styles/common.css">
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="popup-container">
+        <!-- Header -->
+        <div class="popup-header">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="../assets/icons/icon48.png" alt="Logo" class="logo-img">
+                    <h1 class="app-title">FB Marketplace Auto Poster</h1>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-sm btn-outline" id="settingsBtn" title="Configurações">
+                        ⚙️
+                    </button>
+                    <button class="btn btn-sm btn-outline" id="helpBtn" title="Ajuda">
+                        ❓
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" data-tab="dashboard">
+                📊 Dashboard
+            </button>
+            <button class="nav-tab" data-tab="create">
+                ➕ Criar Anúncio
+            </button>
+            <button class="nav-tab" data-tab="schedule">
+                ⏰ Agendamentos
+            </button>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- Dashboard Tab -->
+            <div class="tab-pane active" id="dashboard">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalAds">0</div>
+                        <div class="stat-label">Total de Anúncios</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="scheduledAds">0</div>
+                        <div class="stat-label">Agendados</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="publishedAds">0</div>
+                        <div class="stat-label">Publicados</div>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h3>Atividade Recente</h3>
+                    <div class="activity-list" id="activityList">
+                        <div class="activity-item">
+                            <div class="activity-icon">📝</div>
+                            <div class="activity-content">
+                                <div class="activity-title">Bem-vindo ao Auto Poster!</div>
+                                <div class="activity-time">Comece criando seu primeiro anúncio</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <button class="btn btn-primary w-100" id="quickCreateBtn">
+                        ➕ Criar Novo Anúncio
+                    </button>
+                    <button class="btn btn-secondary w-100 mt-2" id="bulkImportBtn">
+                        📁 Importar em Massa
+                    </button>
+                </div>
+            </div>
+
+            <!-- Create Ad Tab -->
+            <div class="tab-pane" id="create">
+                <form id="adForm" class="ad-form">
+                    <div class="form-section">
+                        <h3>Informações Básicas</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="adTitle">Título do Anúncio *</label>
+                            <input type="text" class="form-control" id="adTitle" required maxlength="100">
+                            <small class="form-text">Máximo 100 caracteres</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="adDescription">Descrição *</label>
+                            <textarea class="form-control" id="adDescription" required maxlength="1000" rows="4"></textarea>
+                            <small class="form-text">Máximo 1000 caracteres</small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="adPrice">Preço (R$) *</label>
+                                <input type="number" class="form-control" id="adPrice" required min="0" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="adCondition">Condição *</label>
+                                <select class="form-control" id="adCondition" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="new">Novo</option>
+                                    <option value="used_like_new">Usado - Como novo</option>
+                                    <option value="used_good">Usado - Bom estado</option>
+                                    <option value="used_fair">Usado - Estado regular</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Categoria e Detalhes</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="adCategory">Categoria *</label>
+                            <select class="form-control" id="adCategory" required>
+                                <option value="">Selecione uma categoria...</option>
+                                <option value="vehicles">Veículos</option>
+                                <option value="property_rentals">Imóveis para Alugar</option>
+                                <option value="apparel">Roupas e Acessórios</option>
+                                <option value="electronics">Eletrônicos</option>
+                                <option value="entertainment">Entretenimento</option>
+                                <option value="family">Família</option>
+                                <option value="free_stuff">Itens Gratuitos</option>
+                                <option value="garden_outdoor">Jardim e Área Externa</option>
+                                <option value="hobbies">Hobbies</option>
+                                <option value="home_improvement">Casa e Jardim</option>
+                                <option value="home_sales">Imóveis à Venda</option>
+                                <option value="musical_instruments">Instrumentos Musicais</option>
+                                <option value="office_supplies">Material de Escritório</option>
+                                <option value="pet_supplies">Pet Shop</option>
+                                <option value="sporting_goods">Artigos Esportivos</option>
+                                <option value="toys_games">Brinquedos e Jogos</option>
+                                <option value="buy_sell_groups">Grupos de Compra e Venda</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="adBrand">Marca</label>
+                            <input type="text" class="form-control" id="adBrand" maxlength="50">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="adTags">Tags/Palavras-chave</label>
+                            <input type="text" class="form-control" id="adTags" placeholder="Separe as tags com vírgulas">
+                            <small class="form-text">Ex: smartphone, android, samsung</small>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Localização</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="adLocation">Localização *</label>
+                            <input type="text" class="form-control" id="adLocation" required placeholder="Cidade, Estado">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Imagens</h3>
+                        
+                        <div class="image-upload-area" id="imageUploadArea">
+                            <div class="upload-placeholder">
+                                <div class="upload-icon">📷</div>
+                                <div class="upload-text">
+                                    <strong>Clique para adicionar imagens</strong>
+                                    <br>ou arraste e solte aqui
+                                </div>
+                                <input type="file" id="imageInput" multiple accept="image/*" style="display: none;">
+                            </div>
+                            <div class="image-preview-grid" id="imagePreviewGrid"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Vídeo (Opcional)</h3>
+                        
+                        <div class="video-upload-area" id="videoUploadArea">
+                            <div class="upload-placeholder">
+                                <div class="upload-icon">🎥</div>
+                                <div class="upload-text">
+                                    <strong>Clique para adicionar vídeo</strong>
+                                    <br>ou arraste e solte aqui
+                                </div>
+                                <div class="upload-info">
+                                    <small>Formatos: MP4, MOV (máx. 100MB)</small>
+                                    <br>
+                                    <small>Duração: 5-60 segundos</small>
+                                </div>
+                                <input type="file" id="videoInput" accept="video/*" style="display: none;">
+                            </div>
+                            <div class="video-preview-grid" id="videoPreviewGrid"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Agendamento</h3>
+                        
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="schedulePost">
+                            <label class="form-check-label" for="schedulePost">
+                                Agendar publicação
+                            </label>
+                        </div>
+
+                        <div class="schedule-options" id="scheduleOptions" style="display: none;">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="scheduleDate">Data</label>
+                                    <input type="date" class="form-control" id="scheduleDate">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="scheduleTime">Horário</label>
+                                    <input type="time" class="form-control" id="scheduleTime">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="saveAsDraftBtn">
+                            💾 Salvar como Rascunho
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="btn-text">🚀 Publicar Agora</span>
+                            <span class="loading d-none"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Schedule Tab -->
+            <div class="tab-pane" id="schedule">
+                <div class="schedule-header">
+                    <h3>Anúncios Agendados</h3>
+                    <button class="btn btn-sm btn-primary" id="refreshScheduleBtn">
+                        🔄 Atualizar
+                    </button>
+                </div>
+
+                <div class="schedule-filters">
+                    <select class="form-control" id="scheduleFilter">
+                        <option value="all">Todos os agendamentos</option>
+                        <option value="pending">Pendentes</option>
+                        <option value="completed">Concluídos</option>
+                        <option value="failed">Falharam</option>
+                    </select>
+                </div>
+
+                <div class="schedule-list" id="scheduleList">
+                    <div class="empty-state">
+                        <div class="empty-icon">📅</div>
+                        <div class="empty-text">
+                            <h4>Nenhum agendamento encontrado</h4>
+                            <p>Crie um anúncio e agende sua publicação</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-item">
+                <span class="status-indicator" id="connectionStatus"></span>
+                <span class="status-text" id="connectionText">Verificando conexão...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="bulkImportModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Importar Anúncios em Massa</h3>
+                <button class="modal-close" id="closeBulkModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="import-options">
+                    <div class="import-option">
+                        <input type="radio" name="importType" value="csv" id="importCSV" checked>
+                        <label for="importCSV">Arquivo CSV</label>
+                    </div>
+                    <div class="import-option">
+                        <input type="radio" name="importType" value="json" id="importJSON">
+                        <label for="importJSON">Arquivo JSON</label>
+                    </div>
+                </div>
+                
+                <div class="file-upload">
+                    <input type="file" id="bulkFileInput" accept=".csv,.json">
+                    <label for="bulkFileInput" class="btn btn-outline w-100">
+                        📁 Selecionar Arquivo
+                    </label>
+                </div>
+                
+                <div class="import-preview" id="importPreview" style="display: none;">
+                    <h4>Prévia dos Dados</h4>
+                    <div class="preview-content" id="previewContent"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelImportBtn">Cancelar</button>
+                <button class="btn btn-primary" id="confirmImportBtn" disabled>
+                    📥 Importar Anúncios
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../lib/utils.js"></script>
+    <script src="../lib/database.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>
+
